@@ -20,7 +20,7 @@ digraph G {
 `;
 
 console.log(template({
-  deps: [
+  list: [
     'a1',
     'b1',
     'c1'
