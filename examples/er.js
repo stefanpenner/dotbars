@@ -12,8 +12,11 @@ dotbars.registerHelper('arrow-for-edge', function(edge) {
   return `arrowtail=${arrow.tail} arrowhead=${arrow.head}`
 });
 
-const template = dotbars.compile(fs.readFileSync(__dirname + '/er.dot', 'UTF8'));
+dotbars.registerHelper('default', function(a,b) {
+  return a || b;
+});
 
+const template = dotbars.compile(fs.readFileSync(__dirname + '/er.dot', 'UTF8'));
 const nodes = [
   {
     name: 'common/me',
@@ -47,8 +50,8 @@ const edges = [
 ];
 
 const REL_TYPE_TO_ARROW = {
-  'belongs-to': { head: 'tee',   tail: 'none' },
-  'has-many':   { head: 'crow',  tail: 'none' }
+  'belongsTo': { head: 'vee',   tail: 'none' },
+  'hasNany':   { head: 'crow',  tail: 'none' }
 };
 
 console.log(template({
