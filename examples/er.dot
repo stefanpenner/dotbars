@@ -4,21 +4,18 @@ digraph models_diagram {
   node [shape="record" fontsize=9 fontname="Verdana" margin=0];
   edge [dir="both" arrowsize=0.8];
 
-{{#each entities}}
+{{#each nodes}}
   "{{name}}"[shape=none margin=0 label=<
     <table border="1" cellborder="0" cellspacing="0" cellpadding="4">
       <tr><td border="0" port="*" bgcolor="lightgray">{{name}}</td></tr>
-      {{#each relationships}}
-        <tr><td border="0" port="{{name}}" align="left">.{{name}}</td></tr>
-      {{/each}}
-      {{#each attributes}}
-        <tr><td border="0" port="{{name}}" align="left">.{{name}}: { {{type}} }</td></tr>
+      {{#each properties}}
+        <tr><td border="0" port="{{name}}" align="left">.{{name}} {{label}}</td></tr>
       {{/each}}
     </table>>
   ];
 {{/each}}
 
-{{#each relationships}}
-  "{{source}}":"{{name}}" -> "{{target}}":"*" [arrowtail={{arrow.tail}} arrowhead={{arrow.head}}]
+{{#each edges}}
+  "{{from.node}}":"{{from.property}}" -> "{{to.node}}":"{{to.property}}" [{{arrow-for-edge this}}]
 {{/each}}
 }

@@ -17,7 +17,7 @@ export class Dotbars {
 
   registerHelper(name, fn) {
     this._handlebars.registerHelper(name, function() {
-      return new Handlebars.HtmlSafeString(fn());
+      return new Handlebars.SafeString(fn(...arguments));
     });
   }
 

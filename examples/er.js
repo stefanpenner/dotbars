@@ -2,53 +2,59 @@ const Dotbars = require('../').Dotbars;
 const fs = require('fs');
 
 let dotbars = new Dotbars();
+
+dotbars.registerHelper('arrow-for-edge', function(edge) {
+  let arrow = REL_TYPE_TO_ARROW[edge.kind] || {
+    tail: 'none',
+    head: 'none'
+  };
+
+  return `arrowtail=${arrow.tail} arrowhead=${arrow.head}`
+});
+
 const template = dotbars.compile(fs.readFileSync(__dirname + '/er.dot', 'UTF8'));
 
-const entities = [
+const nodes = [
   {
     name: 'common/me',
-    relationships: [
-      { name: 'miniProfile', target: 'identity/shared/mini-profile', type: 'belongs-to' }
-    ],
-    attributes: [
-      { name: 'publicContactInfo', type: '...' }
+    properties: [
+      { name: 'miniProfile', kind: 'belongs-to'},
+      { name: 'publicContactInfo', kind: 'attribute', label: '{...}'}
     ]
   },
 
   {
     name: 'identity/shared/mini-profile',
-    attributes: [
-      { name: 'picture', type: '...' },
-      { name: 'backgroundImage', type: '...' }
+    properties: [
+      { name: 'picture',         kind: 'attribute', label: '{...}'},
+      { name: 'backgroundImage', kind: 'attribute', label: '{...}'}
     ]
   }
 ];
 
+const edges = [
+  {
+    from: {
+      node: 'common/me',
+      property: 'miniProfile'
+    },
+    kind: 'belongs-to',
+    to: {
+      node: 'identity/shared/mini-profile',
+      property: '*'
+    }
+  }
+];
+
 const REL_TYPE_TO_ARROW = {
-  'belongs-to': { head: 'tee',  tail: 'none' },
-  'has-many':   { head: 'crow', tail: 'none' }
+  'belongs-to': { head: 'tee',   tail: 'none' },
+  'has-many':   { head: 'crow',  tail: 'none' }
 };
 
-function relationshipsFor(entities) {
-  const relationships = [];
-
-  entities.forEach(entity => {
-    if (Array.isArray(entity.relationships)) {
-    entity.relationships.forEach(rel => {
-      relationships.push({
-        source: entity.name,
-        name: rel.name,
-        target: rel.target,
-        arrow: REL_TYPE_TO_ARROW[rel.type]
-      });
-    });
-    }
-  });
-
-  return relationships;
-}
-
 console.log(template({
-  entities,
-  relationships: relationshipsFor(entities)
+  nodes,
+  edges: edges.map(edge => {
+    edge.arrow = REL_TYPE_TO_ARROW[edge.kind]
+    return edge;
+  })
 }));
