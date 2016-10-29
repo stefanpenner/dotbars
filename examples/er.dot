@@ -4,11 +4,13 @@ digraph models_diagram {
   edge [dir="both" arrowsize=0.8];
 
 {{#each nodes}}
-  "{{name}}"[shape=none margin=0 {{{dot.attributes}}} label=<
-    <table border="1" cellborder="0" cellspacing="0" cellpadding="4">
+  "{{name}}"[shape=record margin=0 {{{dot.attributes}}} label=<
+    <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
       <tr><td border="0" port="*" bgcolor="{{default dot.bgcolor 'grey91'}}">{{name}}</td></tr>
       {{#each properties}}
         <tr><td border="0" port="{{name}}" align="left">.{{name}} {{label}}</td></tr>
+      {{else}}
+        <tr><td border="0" align="left"><center>...</center></td></tr>
       {{/each}}
     </table>>
   ];
