@@ -53,8 +53,5 @@ const REL_TYPE_TO_ARROW = {
 
 console.log(template({
   nodes,
-  edges: edges.map(edge => {
-    edge.arrow = REL_TYPE_TO_ARROW[edge.kind]
-    return edge;
-  })
+  edges
 }));
