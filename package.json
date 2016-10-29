@@ -1,8 +1,9 @@
 {
   "name": "dotbars",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "dist/dotbars.cjs.js",
   "scripts": {
+    "build": "rollup -c rollup/node.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -10,6 +11,11 @@
   "dependencies": {
     "handlebars": "^4.0.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "rollup": "^0.36.3",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-node-resolve": "^2.0.0"
+  },
   "description": ""
 }
