@@ -24,6 +24,11 @@ const entities = [
   }
 ];
 
+const REL_TYPE_TO_ARROW = {
+  'belongs-to': { head: 'tee',  tail: 'none' },
+  'has-many':   { head: 'crow', tail: 'none' }
+};
+
 function relationshipsFor(entities) {
   const relationships = [];
 
@@ -33,7 +38,8 @@ function relationshipsFor(entities) {
       relationships.push({
         source: entity.name,
         name: rel.name,
-        target: rel.target
+        target: rel.target,
+        arrow: REL_TYPE_TO_ARROW[rel.type]
       });
     });
     }
@@ -41,9 +47,7 @@ function relationshipsFor(entities) {
 
   return relationships;
 }
-// TODO:
-//   * load from seperate file
-//   * extract edges based on whole-graph analsis, so we can correctly array the edge
+
 console.log(template({
   entities,
   relationships: relationshipsFor(entities)

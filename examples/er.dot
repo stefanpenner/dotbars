@@ -19,6 +19,6 @@ digraph models_diagram {
 {{/each}}
 
 {{#each relationships}}
-  "{{source}}":"{{name}}" -> "{{target}}":"*" [arrowtail=none  arrowhead=tee]
+  "{{source}}":"{{name}}" -> "{{target}}":"*" [arrowtail={{arrow.tail}} arrowhead={{arrow.head}}]
 {{/each}}
 }
