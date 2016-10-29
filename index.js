@@ -39,6 +39,11 @@ export class Dotbars {
 }
 
 const main = new Dotbars();
-export default function(parts, ...variables) {
+
+export default function dotbars(parts, ...variables) {
   return main.tag(...arguments);
+}
+
+dotbars.compile = function(template) {
+  return main.compile(template);
 }
