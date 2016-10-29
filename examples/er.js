@@ -51,7 +51,7 @@ const edges = [
 
 const REL_TYPE_TO_ARROW = {
   'belongsTo': { head: 'vee',   tail: 'none' },
-  'hasNany':   { head: 'crow',  tail: 'none' }
+  'hasMany':   { head: 'crow',  tail: 'none' }
 };
 
 console.log(template({
