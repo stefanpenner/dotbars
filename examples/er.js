@@ -1,32 +1,8 @@
-const dotbars = require('../').default;
+const Dotbars = require('../').Dotbars;
+const fs = require('fs');
 
-const template = dotbars`
-digraph models_diagram {
-  graph[rankdir=LR, concentrate=true, overlap=false, splines=true];
-
-  node [shape="record" fontsize=9 fontname="Verdana" margin=0];
-  edge [dir="both" arrowsize=0.8];
-
-{{#each entities}}
-  "{{name}}"[shape=none margin=0 label=<
-    <table border="1" cellborder="0" cellspacing="0" cellpadding="4">
-      <tr><td border="0" port="*" bgcolor="lightgray">{{name}}</td></tr>
-      {{#each relationships}}
-        <tr><td border="0" port="{{name}}" align="left">.{{name}}</td></tr>
-      {{/each}}
-      {{#each attributes}}
-        <tr><td border="0" port="{{name}}" align="left">.{{name}}: { {{type}} }</td></tr>
-      {{/each}}
-    </table>>
-  ];
-{{/each}}
-
-
-  {{#each relationships}}
-    "{{source}}":"{{name}}" -> "{{target}}":"*" [arrowtail=odot arrowhead=tee]
-  {{/each}}
-}
-`;
+let dotbars = new Dotbars();
+const template = dotbars.compile(fs.readFileSync(__dirname + '/er.dot', 'UTF8'));
 
 const entities = [
   {
