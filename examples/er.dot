@@ -15,7 +15,7 @@ digraph models_diagram {
 	</tr>
       {{/each}}
     </table>
-	>];
+  >];
 {{/each}}
 
 {{#each edges}}
