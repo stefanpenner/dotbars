@@ -11,9 +11,8 @@ digraph models_diagram {
         <tr><td border="0" port="{{name}}" align="left">.{{name}}: {{kind}} {{label}}</td></tr>
       {{else}}
         <tr>
-					<td border="0" port="any" align="left">
-				  </td>
-				</tr>
+	  <td border="0" port="any" align="left"></td>
+	</tr>
       {{/each}}
     </table>
 	>];
