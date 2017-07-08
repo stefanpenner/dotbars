@@ -9,7 +9,8 @@ npm install dotbars
 ```
 
 ```js
-const dotbars = require('dotbars').default;
+const dotbars = require('dotbars');
+const fs = require('fs');
 
 const template = dotbars`
 digraph G {
